@@ -24,13 +24,12 @@
             /* Menggunakan gambar sebagai background CSS, bukan tag <img> */
             background-image: url('bg.jpg');
             
-            /* Karena gambar sudah dipotong secara khusus menjadi 1920x950, 
-               kita bisa menariknya (stretch) menutupi 100% layar. 
-               Garis biru akan hilang, dan gambar TIDAK akan terlihat bantet lagi 
-               karena rasionya sudah sangat mendekati bentuk browser asli. */
-            background-size: 100% 100%;
+            /* Menggunakan 'cover' agar gambar tetap proporsional dan tidak bantet 
+               di layar dengan rasio berbeda (seperti iPad/Tablet).
+               Posisi difokuskan ke kanan agar tas selalu terlihat. */
+            background-size: cover;
             background-repeat: no-repeat;
-            background-position: center;
+            background-position: right center;
         }
         .text-overlay {
             position: absolute;
@@ -77,8 +76,8 @@
             50% { opacity: 0; }
         }
         
-        /* Responsif untuk tampilan di HP / Layar Kecil */
-        @media (max-width: 768px) {
+        /* Responsif untuk tampilan di HP dan Tablet Portrait */
+        @media (max-width: 1024px) and (orientation: portrait), (max-width: 768px) {
             .bg-container {
                 /* Menambahkan efek gradient untuk membaurkan (blend) pinggiran atas gambar 
                    tas dengan warna biru background, sehingga terlihat menyatu sempurna */
