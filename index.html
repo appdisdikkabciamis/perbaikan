@@ -3,130 +3,186 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tahap Perancangan</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&display=swap" rel="stylesheet">
+    <title>Portal TALAS Ciamis - Data Peningkatan Layanan</title>
+    <!-- Tailwind CSS untuk Styling Cepat -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Konfigurasi Tema Warna Tailwind -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        text: {
+                            primary: '#0f172a',
+                            secondary: '#475569',
+                            tertiary: '#94a3b8',
+                            inverse: '#524980',
+                        },
+                        surface: {
+                            base: '#000000',
+                            muted: '#f8fafc',
+                            neutral: '#f5f5f5',
+                            raised: '#ffffff',
+                        },
+                        stroke: {
+                            default: '#e5e7eb',
+                            muted: '#e2e8f0',
+                        },
+                        brand: {
+                            50: '#f4f2fb',
+                            100: '#ebe7f7',
+                            200: '#d8d2ef',
+                            300: '#b9aee0',
+                            400: '#9487cf',
+                            500: '#786ebf',
+                            600: '#524980',
+                            700: '#473f70',
+                            800: '#39335d',
+                            900: '#2d2848',
+                        },
+                        accent: {
+                            50: '#f4f2fb',
+                            100: '#ebe7f7',
+                            150: '#d2ccff',
+                            200: '#d8d2ef',
+                            300: '#b9aee0',
+                            400: '#9487cf',
+                            500: '#786ebf',
+                            600: '#524980',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'ui-sans-serif', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', 'Noto Sans', 'sans-serif', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'],
+                        heading: ['Inter', 'ui-sans-serif', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', 'Noto Sans', 'sans-serif', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'],
+                    },
+                    borderRadius: {
+                        xs: '12px',
+                        sm: '16px',
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome untuk Ikon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        body, html {
-            margin: 0;
-            padding: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
+        body {
             font-family: 'Inter', sans-serif;
-            /* Mengubah warna background hitam menjadi biru muda yang mirip dengan gambar 
-               agar garis tepi tidak terlihat aneh saat menggunakan mode 'contain' */
-            background-color: #76c2eb; 
         }
-        .bg-container {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            /* Menggunakan gambar sebagai background CSS, bukan tag <img> */
-            background-image: url('bg.jpg');
-            
-            /* Menggunakan 'cover' agar gambar tetap proporsional dan tidak bantet 
-               di layar dengan rasio berbeda (seperti iPad/Tablet).
-               Posisi difokuskan ke kanan agar tas selalu terlihat. */
-            background-size: cover;
-            background-repeat: no-repeat;
-            background-position: right center;
-        }
-        .text-overlay {
-            position: absolute;
-            top: 50%;
-            left: 10%;
-            transform: translateY(-50%);
-            max-width: 90%;
-            /* Warna teks diubah ke hitam sesuai gambar referensi */
-            color: #000000; 
-            /* Memberikan sedikit efek outline/bayangan terang agar teks tetap tajam */
-            text-shadow: 1px 1px 2px rgba(255,255,255,0.5);
-            animation: fadeIn 1s ease-out forwards;
-        }
-        .text-overlay h1 {
-            /* Ukuran disesuaikan agar proporsional dengan gambar seperti di referensi */
-            font-size: 4vw; 
-            font-weight: 800;
-            line-height: 1.3;
-            margin: 0;
-            letter-spacing: -1px;
-            /* Penting: membuat \n di Javascript menjadi baris baru */
-            white-space: pre-wrap; 
-        }
-        
-        /* Efek kursor berkedip untuk animasi mengetik */
-        .text-overlay h1::after {
+
+        /* Efek Kursor Mengetik */
+        #typewriter::after {
             content: '|';
-            font-weight: 400;
-            animation: blink 1s step-end infinite;
-        }
-        
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(-40%);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(-50%);
-            }
+            animation: blink 0.8s step-start infinite;
+            font-weight: 300;
+            color: #524980; /* Warna ungu sesuai tema */
         }
 
         @keyframes blink {
             50% { opacity: 0; }
         }
-        
-        /* Responsif untuk tampilan di HP dan Tablet Portrait */
-        @media (max-width: 1024px) and (orientation: portrait), (max-width: 768px) {
-            .bg-container {
-                /* Menambahkan efek gradient untuk membaurkan (blend) pinggiran atas gambar 
-                   tas dengan warna biru background, sehingga terlihat menyatu sempurna */
-                background-image: 
-                    linear-gradient(to bottom, #76c2eb 34%, transparent 45%),
-                    url('bg.jpg');
-                background-size: 100% 100%, auto 65%;
-                /* Menggeser tas sedikit ke kiri dari 80% ke 87% agar benar-benar pas di tengah */
-                background-position: center top, 87% bottom;
-                background-repeat: no-repeat, no-repeat;
-            }
-            .text-overlay {
-                /* Teks diturunkan sedikit agar tidak terlalu mepet atas layar */
-                top: 20%;
-                left: 8%;
-                max-width: 85%;
-            }
-            .text-overlay h1 {
-                font-size: 8vw; /* Sedikit dikecilkan agar pas */
-            }
+
+        /* Animasi Muncul Ikon (Jatuh dari Atas) */
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-40px) scale(0.95); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        .animate-fade-in {
+            animation: fadeInDown 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+        }
+
+        /* Pola Latar Belakang Hero */
+        .bg-pattern {
+            position: relative;
+            background-color: #f8fafc;
+        }
+
+        .bg-pattern::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            background-image:
+                linear-gradient(rgba(120, 110, 191, 0.22) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(120, 110, 191, 0.22) 1px, transparent 1px);
+            background-size: 144px 144px;
+            background-position: center center;
+            -webkit-mask-image: radial-gradient(ellipse 75% 45% at center, black 20%, transparent 100%);
+            mask-image: radial-gradient(ellipse 75% 45% at center, black 20%, transparent 100%);
+            /* Transisi sangat halus untuk efek hover */
+            transition: transform 1.5s ease-out;
+        }
+
+        /* Efek saat mouse diarahkan ke background */
+        .bg-pattern:hover::before {
+            transform: scale(1.05) translateY(10px);
         }
     </style>
 </head>
-<body>
-    <div class="bg-container">
-        <div class="text-overlay">
-            <h1 id="typewriter"></h1>
-        </div>
-    </div>
+<body class="font-sans text-base text-text-secondary antialiased bg-surface-muted selection:bg-brand-600 selection:text-surface-raised">
 
+    <!-- Hero Section -->
+    <section id="beranda" class="relative min-h-[100dvh] flex items-center justify-center p-4 overflow-hidden bg-pattern">
+        <!-- Dekorasi Latar -->
+        <div class="absolute top-0 right-0 -mr-20 -mt-20 w-96 h-96 rounded-full bg-brand-100 blur-3xl opacity-50 pointer-events-none"></div>
+        <div class="absolute bottom-0 left-0 -ml-20 -mb-20 w-80 h-80 rounded-full bg-accent-500/10 blur-3xl opacity-50 pointer-events-none"></div>
+
+        <div class="relative max-w-7xl mx-auto px-16 sm:px-20 lg:px-24 text-center -mt-16">
+            <div id="icon-container" class="flex justify-center -mb-4 relative z-10 opacity-0">
+                <img src="icon.png" alt="Icon" class="w-56 sm:w-72 h-auto object-contain">
+            </div>
+            <h1 id="typewriter" class="font-heading text-4xl sm:text-[42px] lg:text-[52px] font-extrabold text-text-primary tracking-tight leading-tight mb-10 relative z-20" style="min-height: 140px;">
+            </h1>
+
+            <div id="button-container" class="opacity-0 transition-opacity duration-1000 flex flex-col sm:flex-row gap-4 justify-center items-center">
+                <a href="https://talas-disdik.ciamiskab.go.id/" class="w-full sm:w-auto px-8 py-3 text-base bg-brand-600 text-surface-raised font-semibold rounded-xs shadow-lg hover:bg-brand-700 hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
+                    <i class="fa-solid fa-rocket mr-2"></i> Jelajahi Portal Layanan Lainnya
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- JavaScript untuk Animasi & Logika -->
     <script>
-        // Menggunakan \n untuk membuat baris baru persis seperti di gambar
-        const text = "Portal layanan\nini sedang\ndalam tahap\nperancangan ...";
-        const element = document.getElementById("typewriter");
-        let i = 0;
-        
-        function typeWriter() {
-            if (i < text.length) {
-                element.innerHTML += text.charAt(i);
-                i++;
-                // Kecepatan ketik
-                let speed = Math.random() * (100 - 40) + 40; 
-                setTimeout(typeWriter, speed);
+        document.addEventListener('DOMContentLoaded', function() {
+            const text = "Portal layanan ini sedang\ndalam tahap perancangan ...";
+            const typewriterElement = document.getElementById("typewriter");
+            let i = 0;
+
+            function typeWriter() {
+                if (i < text.length) {
+                    if (text.charAt(i) === '\n') {
+                        typewriterElement.innerHTML += '<br>';
+                    } else {
+                        typewriterElement.innerHTML += text.charAt(i);
+                    }
+                    i++;
+                    setTimeout(typeWriter, 100);
+                } else {
+                    // Animasi selesai, tampilkan tombol dan ikon
+                    const btnContainer = document.getElementById('button-container');
+                    if (btnContainer) {
+                        btnContainer.classList.remove('opacity-0');
+                    }
+                    
+                    const iconContainer = document.getElementById('icon-container');
+                    if (iconContainer) {
+                        // Memulai animasi jatuh dari atas
+                        iconContainer.classList.add('animate-fade-in');
+                        // Menghapus class opacity-0 bawaan agar animasi terlihat
+                        iconContainer.classList.remove('opacity-0');
+                    }
+                }
             }
-        }
-        
-        window.onload = function() {
-            setTimeout(typeWriter, 500);
-        };
+
+            // Memulai efek mengetik
+            typeWriter();
+        });
     </script>
 </body>
 </html>
