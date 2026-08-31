@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tahap Perancangan</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&display=swap" rel="stylesheet">
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            font-family: 'Inter', sans-serif;
+            /* Mengubah warna background hitam menjadi biru muda yang mirip dengan gambar 
+               agar garis tepi tidak terlihat aneh saat menggunakan mode 'contain' */
+            background-color: #76c2eb; 
+        }
+        .bg-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            /* Menggunakan gambar sebagai background CSS, bukan tag <img> */
+            background-image: url('bg.jpg');
+            
+            /* Karena gambar sudah dipotong secara khusus menjadi 1920x950, 
+               kita bisa menariknya (stretch) menutupi 100% layar. 
+               Garis biru akan hilang, dan gambar TIDAK akan terlihat bantet lagi 
+               karena rasionya sudah sangat mendekati bentuk browser asli. */
+            background-size: 100% 100%;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+        .text-overlay {
+            position: absolute;
+            top: 50%;
+            left: 10%;
+            transform: translateY(-50%);
+            max-width: 90%;
+            /* Warna teks diubah ke hitam sesuai gambar referensi */
+            color: #000000; 
+            /* Memberikan sedikit efek outline/bayangan terang agar teks tetap tajam */
+            text-shadow: 1px 1px 2px rgba(255,255,255,0.5);
+            animation: fadeIn 1s ease-out forwards;
+        }
+        .text-overlay h1 {
+            /* Ukuran disesuaikan agar proporsional dengan gambar seperti di referensi */
+            font-size: 4vw; 
+            font-weight: 800;
+            line-height: 1.3;
+            margin: 0;
+            letter-spacing: -1px;
+            /* Penting: membuat \n di Javascript menjadi baris baru */
+            white-space: pre-wrap; 
+        }
+        
+        /* Efek kursor berkedip untuk animasi mengetik */
+        .text-overlay h1::after {
+            content: '|';
+            font-weight: 400;
+            animation: blink 1s step-end infinite;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-40%);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(-50%);
+            }
+        }
+
+        @keyframes blink {
+            50% { opacity: 0; }
+        }
+        
+        /* Responsif untuk tampilan di HP / Layar Kecil */
+        @media (max-width: 768px) {
+            .bg-container {
+                /* Di HP (layar berdiri/vertikal), gambar ditarik 100% akan sangat gepeng. 
+                   Jadi kita gunakan 'cover' agar tetap proporsional dan tidak rusak. */
+                background-size: cover;
+                /* Fokus disetel ke 75% (bukan mentok kanan) agar gambar tas 
+                   hanya sedikit terlihat/terpotong sebagian di sebelah kanan */
+                background-position: 75% center;
+            }
+            .text-overlay {
+                /* Menggeser teks agak ke atas di HP agar tidak menutupi gambar tas */
+                top: 25%;
+                left: 6%;
+                max-width: 85%;
+            }
+            .text-overlay h1 {
+                font-size: 9vw; /* Ukuran font disesuaikan agar pas di HP */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-container">
+        <div class="text-overlay">
+            <h1 id="typewriter"></h1>
+        </div>
+    </div>
+
+    <script>
+        // Menggunakan \n untuk membuat baris baru persis seperti di gambar
+        const text = "Portal layanan\nini sedang\ndalam tahap\nperancangan ...";
+        const element = document.getElementById("typewriter");
+        let i = 0;
+        
+        function typeWriter() {
+            if (i < text.length) {
+                element.innerHTML += text.charAt(i);
+                i++;
+                // Kecepatan ketik
+                let speed = Math.random() * (100 - 40) + 40; 
+                setTimeout(typeWriter, speed);
+            }
+        }
+        
+        window.onload = function() {
+            setTimeout(typeWriter, 500);
+        };
+    </script>
+</body>
+</html>
