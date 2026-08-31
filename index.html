@@ -83,15 +83,16 @@
                 /* Menambahkan efek gradient untuk membaurkan (blend) pinggiran atas gambar 
                    tas dengan warna biru background, sehingga terlihat menyatu sempurna */
                 background-image: 
-                    linear-gradient(to bottom, #76c2eb 29%, transparent 40%),
+                    linear-gradient(to bottom, #76c2eb 34%, transparent 45%),
                     url('bg.jpg');
-                background-size: 100% 100%, auto 70%;
-                background-position: center top, 85% bottom;
+                background-size: 100% 100%, auto 65%;
+                /* Menggeser tas agar berada pas di tengah layar (digeser ke kanan dari posisi sebelumnya) */
+                background-position: center top, 80% bottom;
                 background-repeat: no-repeat, no-repeat;
             }
             .text-overlay {
-                /* Teks dinaikkan agar lebih dekat ke atas layar, tapi tetap rapat dengan tas */
-                top: 16%;
+                /* Teks diturunkan sedikit agar tidak terlalu mepet atas layar */
+                top: 20%;
                 left: 8%;
                 max-width: 85%;
             }
