@@ -106,6 +106,16 @@
             animation: fadeInUp 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
         }
 
+        /* Animasi Mengambang (Bounce Pelan) */
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-6px); }
+        }
+
+        .animate-float {
+            animation: float 4s ease-in-out infinite;
+        }
+
         /* Pola Latar Belakang Hero */
         .bg-pattern {
             position: relative;
@@ -156,8 +166,10 @@
             </div>
         </div>
 
-        <!-- Gambar Orang PNG di kanan bawah -->
-        <img src="orang.png" alt="Ilustrasi" class="relative lg:absolute lg:bottom-0 lg:right-0 w-64 sm:w-80 md:w-96 lg:w-96 object-contain pointer-events-none z-10 animate-fade-in-up self-end lg:self-auto" style="animation-delay: 0.3s; opacity: 0; animation-fill-mode: forwards;">
+        <!-- Gambar Orang PNG di kanan bawah dengan efek bounce pelan -->
+        <div class="relative lg:absolute lg:bottom-0 lg:right-0 z-10 self-end lg:self-auto pointer-events-none animate-float">
+            <img src="orang.png" alt="Ilustrasi" class="w-64 sm:w-80 md:w-96 lg:w-96 object-contain animate-fade-in-up" style="animation-delay: 0.3s; opacity: 0; animation-fill-mode: forwards;">
+        </div>
     </section>
 
     <!-- JavaScript untuk Animasi & Logika -->
