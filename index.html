@@ -96,6 +96,16 @@
             animation: fadeInDown 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
         }
 
+        /* Animasi Muncul dari Bawah */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(40px) scale(0.95); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        .animate-fade-in-up {
+            animation: fadeInUp 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+        }
+
         /* Pola Latar Belakang Hero */
         .bg-pattern {
             position: relative;
@@ -127,24 +137,27 @@
 <body class="font-sans text-base text-text-secondary antialiased bg-surface-muted selection:bg-brand-600 selection:text-surface-raised">
 
     <!-- Hero Section -->
-    <section id="beranda" class="relative min-h-[100dvh] flex items-center justify-center p-4 overflow-hidden bg-pattern">
+    <section id="beranda" class="relative min-h-[100dvh] flex flex-col lg:flex-row items-center justify-center p-4 overflow-hidden bg-pattern">
         <!-- Dekorasi Latar -->
         <div class="absolute top-0 right-0 -mr-20 -mt-20 w-96 h-96 rounded-full bg-brand-100 blur-3xl opacity-50 pointer-events-none"></div>
         <div class="absolute bottom-0 left-0 -ml-20 -mb-20 w-80 h-80 rounded-full bg-accent-500/10 blur-3xl opacity-50 pointer-events-none"></div>
 
-        <div class="relative max-w-7xl mx-auto px-6 sm:px-20 lg:px-24 text-center -mt-16">
-            <div id="icon-container" class="flex justify-center -mb-4 relative z-10 opacity-0">
+        <div class="relative max-w-7xl mx-auto px-6 sm:px-20 lg:px-24 w-full text-left lg:-mt-16 mt-16 flex-1 flex flex-col justify-center lg:block z-20">
+            <div id="icon-container" class="flex justify-start -mb-4 relative z-10 opacity-0 transition-opacity duration-1000">
                 <img src="icon.png" alt="Icon" class="w-56 sm:w-72 h-auto object-contain">
             </div>
-            <h1 id="typewriter" class="font-heading text-4xl sm:text-[42px] lg:text-[52px] font-extrabold text-text-primary tracking-tight leading-tight mb-10 relative z-20" style="min-height: 140px;">
+            <h1 id="typewriter" class="font-heading text-4xl sm:text-[42px] lg:text-[52px] font-extrabold text-gray-700 tracking-tight leading-tight mb-10 relative z-20" style="min-height: 140px;">
             </h1>
 
-            <div id="button-container" class="opacity-0 transition-opacity duration-1000 flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <div id="button-container" class="opacity-0 transition-opacity duration-1000 flex flex-col sm:flex-row gap-4 justify-start items-start sm:items-center">
                 <a href="https://talas-disdik.ciamiskab.go.id/" class="w-auto px-6 sm:px-12 py-3 sm:py-4 text-base whitespace-nowrap bg-brand-600 text-surface-raised font-semibold rounded-xs shadow-lg hover:bg-brand-700 hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
                     <i class="fa-solid fa-rocket mr-2"></i> Jelajahi Portal Layanan
                 </a>
             </div>
         </div>
+
+        <!-- Gambar Orang PNG di kanan bawah -->
+        <img src="orang.png" alt="Ilustrasi" class="relative lg:absolute lg:bottom-0 lg:right-0 w-64 sm:w-80 md:w-96 lg:w-96 object-contain pointer-events-none z-10 animate-fade-in-up self-end lg:self-auto" style="animation-delay: 0.3s; opacity: 0; animation-fill-mode: forwards;">
     </section>
 
     <!-- JavaScript untuk Animasi & Logika -->
@@ -172,9 +185,7 @@
                     
                     const iconContainer = document.getElementById('icon-container');
                     if (iconContainer) {
-                        // Memulai animasi jatuh dari atas
-                        iconContainer.classList.add('animate-fade-in');
-                        // Menghapus class opacity-0 bawaan agar animasi terlihat
+                        // Menghapus class opacity-0 bawaan agar ikon memudar seperti tombol
                         iconContainer.classList.remove('opacity-0');
                     }
                 }
